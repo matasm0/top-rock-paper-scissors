@@ -9,19 +9,35 @@ function playRound(playerSelection, computerSelection) {
     computerSelection = computerSelection.toLowerCase();
 
     if (playerSelection == computerSelection) {
-        return "You tied, you both chose " + playerSelection + "!";
+        console.log("You tied, you both chose " + playerSelection + "!");
+        return null;
     }
 
     if (playerSelection == "paper" && computerSelection == "scissors" ||
         playerSelection == "rock" && computerSelection == "paper" ||
         playerSelection == "scissors" && computerSelection == "rock") {
-            return "You lose, " + computerSelection + " beats " + playerSelection + "!";
+            console.log("You lose, " + computerSelection + " beats " + playerSelection + "!");
+            return false;
         }
     
-    return "You win, " + playerSelection + " beats " + computerSelection + "!";
+    console.log("You win, " + playerSelection + " beats " + computerSelection + "!");
+    return true;
 }
 
-const playerSelection = prompt();
-const computerSelection = computerPlay();
+function game() {
+    let numGames = 5;
+    let pScore = 0, cScore = 0;
 
-console.log(playRound(playerSelection, computerSelection));
+    for (let i = 0; i < numGames; i++) {
+        let currRound = playRound(prompt(), computerPlay());
+        if (currRound === null) continue;
+        if (currRound) pScore++;
+        else cScore++;
+    }
+
+    if (pScore == cScore) console.log("You tied! You both won " + pScore + " games!");
+    else if (pScore > cScore) console.log("You won! You won " + pScore + " games, while the computer won " + cScore + " games!");
+    else console.log("You lost! You won " + pScore + " games, while the computer won " + cScore + " games!");
+}
+
+game();
