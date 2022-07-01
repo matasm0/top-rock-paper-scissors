@@ -6,11 +6,19 @@ let pScore = 0, cScore = 0;
 
 let button = document.querySelectorAll(".playerside button");
 
-button.forEach((x) => {x.addEventListener('click', function(e){game(e.target.classList.value)})});
+button.forEach((x) => {x.addEventListener('click', function(e){
+    game(e.target.classList.value);
+    button.forEach((y) => {y.classList.remove('selected')});
+    e.target.classList.add('selected');
+})});
 
 
 function displayComputerSelection(computerSelection) {
-    return;
+    let cbuttons = document.querySelectorAll('.computerside button')
+    cbuttons.forEach((x) => {
+        x.classList.remove('selected');
+        if (x.classList.contains(computerSelection)) x.classList.add('selected');
+    });
 }
 
 function computerPlay() {
