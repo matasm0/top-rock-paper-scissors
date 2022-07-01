@@ -1,0 +1,51 @@
+.header {
+    height: 15vh;
+    border-bottom: 2px solid black;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header div {
+    font-size: 50px;
+    margin: 40px;
+}
+
+.playarea {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.playerside,
+.computerside {
+    width: 50vw;
+    height: 80vh;
+    box-sizing: border-box;
+
+    display: flex;
+}
+
+.playerside {
+    border-right: 2px solid black;
+}
+
+.buttons {
+    flex: 1;
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 80px;
+}
+
+button {
+    width: 150px;
+    height: 150px;
+
+    font-size: 30px;
+    text-align: center;
+}

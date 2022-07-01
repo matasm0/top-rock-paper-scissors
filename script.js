@@ -1,43 +1,53 @@
+let announcer = document.querySelector(".announcer");
+let pScoreDiv = document.querySelector(".pscore");
+let cScoreDiv = document.querySelector(".cscore");
+
+let pScore = 0, cScore = 0;
+
+let button = document.querySelectorAll(".playerside button");
+
+button.forEach((x) => {x.addEventListener('click', function(e){game(e.target.classList.value)})});
+
+
+function displayComputerSelection(computerSelection) {
+    return;
+}
+
 function computerPlay() {
     const choices = ["rock", "paper", "scissors"];
     const choice = Math.floor(Math.random() * 3);
+
+    displayComputerSelection(choices[choice]);
+
     return choices[choice];
 }
 
 function playRound(playerSelection, computerSelection) {
-    playerSelection = playerSelection.toLowerCase();
-    computerSelection = computerSelection.toLowerCase();
-
     if (playerSelection == computerSelection) {
-        console.log("You tied, you both chose " + playerSelection + "!");
+        announcer.textContent = "You tied!";
         return null;
     }
 
     if (playerSelection == "paper" && computerSelection == "scissors" ||
         playerSelection == "rock" && computerSelection == "paper" ||
         playerSelection == "scissors" && computerSelection == "rock") {
-            console.log("You lose, " + computerSelection + " beats " + playerSelection + "!");
+            announcer.textContent = "You lost!"
             return false;
         }
     
-    console.log("You win, " + playerSelection + " beats " + computerSelection + "!");
+    announcer.textContent = "You won!";
     return true;
 }
 
-function game() {
-    let numGames = 5;
-    let pScore = 0, cScore = 0;
+function game(playerSelection) {
+    let currRound = playRound(playerSelection, computerPlay());
+    
+    if (currRound === null) return;
+    if (currRound) pScore++;
+    else cScore++;
 
-    for (let i = 0; i < numGames; i++) {
-        let currRound = playRound(prompt(), computerPlay());
-        if (currRound === null) continue;
-        if (currRound) pScore++;
-        else cScore++;
-    }
-
-    if (pScore == cScore) console.log("You tied! You both won " + pScore + " games!");
-    else if (pScore > cScore) console.log("You won! You won " + pScore + " games, while the computer won " + cScore + " games!");
-    else console.log("You lost! You won " + pScore + " games, while the computer won " + cScore + " games!");
+    pScoreDiv.textContent = pScore;
+    cScoreDiv.textContent = cScore;
 }
 
-game();
+
