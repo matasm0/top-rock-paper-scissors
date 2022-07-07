@@ -7,7 +7,7 @@ let pScore = 0, cScore = 0;
 let button = document.querySelectorAll(".playerside button");
 
 button.forEach((x) => {x.addEventListener('click', function(e){
-    game(e.target.classList.value);
+    game(e.target.classList[0]);
     button.forEach((y) => {y.classList.remove('selected')});
     e.target.classList.add('selected');
 })});
@@ -31,6 +31,7 @@ function computerPlay() {
 }
 
 function playRound(playerSelection, computerSelection) {
+    
     if (playerSelection == computerSelection) {
         announcer.textContent = "You tied!";
         return null;
